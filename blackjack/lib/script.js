@@ -1,18 +1,40 @@
 
-let suits = ["Hearts", "Clubs", "Diamonds", "Spiders"]
-let values = ["Ace", "King", "Queen", "Jack", "Ten", "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One"]
+let suits = ["Hearts", "Clubs", "Diamonds", "Spiders"],
+    values = ["Ace", "King", "Queen", "Jack", "Ten", "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two", "One"]
 
-let textArea = document.getElementById('text-area')
-let newGameButton = document.getElementById('new-game-button')
-let hitButton = document.getElementById('hit-button')
-let stayButton = document.getElementById('stay-button')
+// DOM variables
+let textArea = document.getElementById('text-area'),
+    newGameButton = document.getElementById('new-game-button'),
+    hitButton = document.getElementById('hit-button'),
+    stayButton = document.getElementById('stay-button')
+
+// Game variables
+let gameStarted = false,
+    gameOver = false,
+    palyerWon = false,
+    dealerCards = [],
+    playercards = [],
+    dealerScore = 0,
+    playerScore = 0,
+    deck = []
 
 hitButton.style.display = 'none'
 stayButton.style.display = 'none'
+showStatus()
 
 newGameButton.addEventListener('click', function() {
-    textArea.innerText = 'Started...'
-    newGameButton.style
+    gameStarted = true
+    gameOver = false
+    playerWon = false
+
+    deck = createDeck()
+    dealerCards = [getNextCard(), getNextCard()]
+    playerCards = [getNextCard(), getNextCard()]
+
+    newGameButton.style.display = 'none'
+    hitButton.style.display = 'inline'
+    stayButton.style.display = 'inline'
+    showStatus()
 })
 
 function createDeck() {
@@ -31,6 +53,12 @@ function createDeck() {
 
 function getCardString(card){
     return card.value + ' of ' + card.suit
+}
+
+function showStatus(){
+    if(!gameStarted)
+        textArea.innerText = 'Welcome to Blackjack!'
+    return
 }
 
 function getNextCard(){
