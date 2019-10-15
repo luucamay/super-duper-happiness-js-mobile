@@ -13,7 +13,7 @@ let gameStarted = false,
     gameOver = false,
     palyerWon = false,
     dealerCards = [],
-    playercards = [],
+    playerCards = [],
     dealerScore = 0,
     playerScore = 0,
     deck = []
@@ -49,6 +49,33 @@ stayButton.addEventListener('click', function(){
     //checkForEndOfGame()
     showStatus()
 })
+
+function checkForEndOfGame(){
+    updateScores();
+
+    if(gameOver){
+        while(dealerScore < playerScore
+              && playerScore <= 21
+              && dealerScore <= 21){
+                  dealerCards.push(getNextCard())
+                  updateScores();
+              }
+    }
+
+    if(playerScore > 21){
+        playerWon = false
+        gameOver = true
+    } else if(dealerScore > 21){
+        playerWon = true
+        gameOver = true
+    } else if(gameOver){
+        if(playerScore > dealerScore){
+            playerWon = true
+        } else {
+            playerWon = false
+        }
+    }
+}
 function createDeck() {
     let deck = []
     for(let i = 0; i < suits.length; i++){
@@ -164,10 +191,7 @@ function getNextCard(){
     return deck.shift()
 }
 
-for (let i = 0; i < deck.length; i++){
-    console.log(deck[i])
-}
-
 console.log("Welcome to Blackjack!")
 
-console.log("You are dealt: ")
+console.log(dealerCards)
+console.log(playerCards)
