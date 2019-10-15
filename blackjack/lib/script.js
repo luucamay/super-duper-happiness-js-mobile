@@ -40,13 +40,13 @@ newGameButton.addEventListener('click', function() {
 
 hitButton.addEventListener('click', function(){
     playerCards.push(getNextCard())
-    //checkForEndOfGame()
+    checkForEndOfGame()
     showStatus()
 })
 
 stayButton.addEventListener('click', function(){
     gameOver = true
-    //checkForEndOfGame()
+    checkForEndOfGame()
     showStatus()
 })
 
